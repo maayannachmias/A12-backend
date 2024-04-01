@@ -2,6 +2,7 @@ require('dotenv').config()
 
 const express = require('express')
 const mongoose = require('mongoose')
+const cors = require('cors');
 const taskRoutes = require('./routes/tasks')
 const userRoutes = require('./routes/user')
 
@@ -29,6 +30,7 @@ app.use((req, res, next) => {
 })
 
 // routes
+app.use(cors({origin: (process.env.CLIENT_URL || 'http://localhost:3000')}));
 app.use('/api/tasks', taskRoutes)
 app.use('/api/user', userRoutes)
 
